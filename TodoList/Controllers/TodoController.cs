@@ -17,7 +17,6 @@ public class TodoController : Controller
     
     public IActionResult CreateTodo()
     {
-        //ViewBag.Users = _database.Users.ToList();
         ViewData["UserId"] = new SelectList(_database.Users, "Id", "Name");
         return View();
     }
