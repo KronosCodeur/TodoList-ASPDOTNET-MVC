@@ -1,0 +1,25 @@
+@model IEnumerable<User>
+
+@{
+    ViewData["Title"] = "List Users";
+}
+
+<h1>Users</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@user.Id</td>
+            <td>@user.Name</td>
+        </tr>
+    }
+    </tbody>
+</table>
