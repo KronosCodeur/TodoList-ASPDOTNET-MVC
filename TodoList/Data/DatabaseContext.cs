@@ -14,8 +14,11 @@ public class DatabaseContext : DbContext
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Todo>().HasOne<User>(todo => todo.User).WithMany(user => user.Todos)
             .HasForeignKey(todo => todo.UserId).IsRequired();
+        modelBuilder.Entity<User>().HasOne<Department>(user =>user.Department).WithMany(department => department.Users)
+            .HasForeignKey(user => user.DepartmentId).IsRequired();
     }
 
     public DbSet<User> Users { get; set; }
     public DbSet<Todo> Todos { get; set; }
+    public DbSet<Department> Departments { get; set; }
 }
