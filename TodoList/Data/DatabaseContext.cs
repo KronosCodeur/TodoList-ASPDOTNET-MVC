@@ -16,9 +16,12 @@ public class DatabaseContext : DbContext
             .HasForeignKey(todo => todo.UserId).IsRequired();
         modelBuilder.Entity<User>().HasOne<Department>(user =>user.Department).WithMany(department => department.Users)
             .HasForeignKey(user => user.DepartmentId).IsRequired();
+        modelBuilder.Entity<Todo>().HasOne<Category>(todo => todo.Category).WithMany(category => category.Todos)
+            .HasForeignKey(todo => todo.CategoryId).IsRequired();
     }
 
     public DbSet<User> Users { get; set; }
     public DbSet<Todo> Todos { get; set; }
+    public DbSet<Category> Categories { get; set; }
     public DbSet<Department> Departments { get; set; }
 }
