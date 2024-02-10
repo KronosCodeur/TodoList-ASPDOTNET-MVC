@@ -18,12 +18,13 @@ public class TodoController : Controller
     public IActionResult CreateTodo()
     {
         ViewData["UserId"] = new SelectList(_database.Users, "Id", "Name");
+        ViewData["CategoryId"] = new SelectList(_database.Categories, "Id", "Title");
         return View();
     }
 
     public IActionResult ListTodos()
     {
-        return View(_database.Todos.Include(t => t.User).ToList());
+        return View(_database.Todos.Include(t => t.User).Include(t=>t.Category).ToList());
     }
 
     [HttpPost]
@@ -32,6 +33,7 @@ public class TodoController : Controller
             _database.Todos.Add(todo);
             _database.SaveChanges();
         ViewBag.Users = _database.Users.ToList();
+        ViewBag.Categories = _database.Categories.ToList();
             return RedirectToAction("ListTodos");
     }
     
